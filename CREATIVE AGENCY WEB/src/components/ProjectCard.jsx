@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import styles from '../styles/App.module.css'
 
 function ProjectCard({ project, onDelete }) {
   const [isDeleting, setIsDeleting] = useState(false)
@@ -13,9 +14,23 @@ function ProjectCard({ project, onDelete }) {
   }
 
   return (
-    <div className="project-card">
+    <div className={styles['project-card']}>
+      <div className={styles['thumbnail']} aria-hidden>
+        ✕
+      </div>
+
+      <div className={styles['project-content']}>
+        <h3>{project.title}</h3>
+        <p>{project.description}</p>
+        {project.createdAt && (
+          <time className={styles['project-date']}>
+            Added: {new Date(project.createdAt).toLocaleDateString()}
+          </time>
+        )}
+      </div>
+
       <button
-        className="delete-btn"
+        className={styles['delete-btn']}
         onClick={handleDelete}
         disabled={isDeleting}
         title="Delete project"
@@ -23,15 +38,6 @@ function ProjectCard({ project, onDelete }) {
       >
         {isDeleting ? '⋯' : '✕'}
       </button>
-      <div className="project-content">
-        <h3>{project.title}</h3>
-        <p>{project.description}</p>
-        {project.createdAt && (
-          <time className="project-date">
-            Added: {new Date(project.createdAt).toLocaleDateString()}
-          </time>
-        )}
-      </div>
     </div>
   )
 }
