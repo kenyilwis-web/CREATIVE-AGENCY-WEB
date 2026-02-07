@@ -84,9 +84,13 @@ function ProjectsList({ searchTerm, onSearchChange }) {
         <div className={styles['projects-footer']}>
           <p className={styles['project-count']}>
             {/* Dynamic count with proper singular/plural grammar */}
+            {filteredProjects.length} {filteredProjects.length === 1 ? 'project' : 'projects'}
+          </p>
+        </div>
       )}
     </div>
   )
 }
 
 export default ProjectsList
+
